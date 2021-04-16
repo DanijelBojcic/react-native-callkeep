@@ -161,11 +161,7 @@ class RNCallKeep {
 
   isCallActive = async (uuid) => await RNCallKeepModule.isCallActive(uuid);
 
-  getCalls = () => {
-    if (isIOS) {
-      return RNCallKeepModule.getCalls();
-    }
-  };
+  getCalls = async () => await RNCallKeepModule.getCalls();
 
   endCall = (uuid) => RNCallKeepModule.endCall(uuid);
 
@@ -189,7 +185,7 @@ class RNCallKeep {
    * @returns Audio route state of audio service
    */
   toggleAudioRouteSpeaker = (uuid, routeSpeaker) => isIOS ? null : RNCallKeepModule.toggleAudioRouteSpeaker(uuid, routeSpeaker);
-  
+
   checkIfBusy = () =>
     isIOS ? RNCallKeepModule.checkIfBusy() : Promise.reject('RNCallKeep.checkIfBusy was called from unsupported OS');
 
