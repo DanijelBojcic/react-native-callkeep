@@ -228,39 +228,39 @@ public class VoiceConnectionService extends ConnectionService {
     }
 
     private void startForegroundService() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-            // Foreground services not required before SDK 28
-            return;
-        }
-        Log.d(TAG, "startForegroundService");
-        if (_settings == null || !_settings.hasKey("foregroundService")) {
-            Log.d(TAG, "Not creating foregroundService because not configured");
-            return;
-        }
-        ReadableMap foregroundSettings = _settings.getMap("foregroundService");
-        String NOTIFICATION_CHANNEL_ID = foregroundSettings.getString("channelId");
-        String channelName = foregroundSettings.getString("channelName");
-        NotificationChannel chan = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_NONE);
-        chan.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
-        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        assert manager != null;
-        manager.createNotificationChannel(chan);
-
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
-        notificationBuilder.setOngoing(true)
-            .setContentTitle(foregroundSettings.getString("notificationTitle"))
-            .setPriority(NotificationManager.IMPORTANCE_MIN)
-            .setCategory(Notification.CATEGORY_SERVICE);
-
-        if (foregroundSettings.hasKey("notificationIcon")) {
-            Context context = this.getApplicationContext();
-            Resources res = context.getResources();
-            String smallIcon = foregroundSettings.getString("notificationIcon");
-            notificationBuilder.setSmallIcon(res.getIdentifier(smallIcon, "mipmap", context.getPackageName()));
-        }
-
-        Notification notification = notificationBuilder.build();
-        startForeground(FOREGROUND_SERVICE_TYPE_MICROPHONE, notification);
+//        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+//            // Foreground services not required before SDK 28
+//            return;
+//        }
+//        Log.d(TAG, "startForegroundService");
+//        if (_settings == null || !_settings.hasKey("foregroundService")) {
+//            Log.d(TAG, "Not creating foregroundService because not configured");
+//            return;
+//        }
+//        ReadableMap foregroundSettings = _settings.getMap("foregroundService");
+//        String NOTIFICATION_CHANNEL_ID = foregroundSettings.getString("channelId");
+//        String channelName = foregroundSettings.getString("channelName");
+//        NotificationChannel chan = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_NONE);
+//        chan.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+//        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//        assert manager != null;
+//        manager.createNotificationChannel(chan);
+//
+//        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
+//        notificationBuilder.setOngoing(true)
+//            .setContentTitle(foregroundSettings.getString("notificationTitle"))
+//            .setPriority(NotificationManager.IMPORTANCE_MIN)
+//            .setCategory(Notification.CATEGORY_SERVICE);
+//
+//        if (foregroundSettings.hasKey("notificationIcon")) {
+//            Context context = this.getApplicationContext();
+//            Resources res = context.getResources();
+//            String smallIcon = foregroundSettings.getString("notificationIcon");
+//            notificationBuilder.setSmallIcon(res.getIdentifier(smallIcon, "mipmap", context.getPackageName()));
+//        }
+//
+//        Notification notification = notificationBuilder.build();
+//        startForeground(FOREGROUND_SERVICE_TYPE_MICROPHONE, notification);
     }
 
     private void stopForegroundService() {
